@@ -5,42 +5,69 @@ public class TestaIntercalaEmUmArray {
     public static void main(String[] args) {
 
         Nota[] notas = {
-                new Nota("andre" , 4),
-                new Nota("mariana" , 5),
-                new Nota("carlos" , 8.5),
-                new Nota("paulo" , 9),
-                new Nota("jonas" , 3),
-                new Nota("juliana" , 6.7),
-                new Nota("guilherme" , 7),
-                new Nota("lucia" , 9.3),
-                new Nota("ana" , 10)
+                new Nota("paulo", 9),
+                new Nota("mariana", 5),
+                new Nota("juliana", 6.7),
+                new Nota("ana", 10),
+                new Nota("lucia", 9.3),
+                new Nota("jonas", 3),
+                new Nota("andre", 4),
+                new Nota("carlos", 8.5),
+                new Nota("guilherme", 7)
         };
 
-        Nota[] notasTexto = {
-                new Nota("ana" , 10),
-                new Nota("carlos" , 8.5),
-                new Nota("jonas" , 3),
-                new Nota("mariana" , 5),
-                new Nota("andre" , 4),
-                new Nota("guilherme" , 7),
-                new Nota("juliana" , 6.7),
-                new Nota("lucia" , 9.3),
-                new Nota("paulo" , 9)
+        Nota[] textos = {
+                new Nota("paulo", 9),
+                new Nota("mariana", 5),
+                new Nota("juliana", 6.7),
+                new Nota("ana", 10),
+                new Nota("lucia", 9.3),
+                new Nota("jonas", 3),
+                new Nota("andre", 4),
+                new Nota("carlos", 8.5),
+                new Nota("guilherme", 7)
         };
 
-        Nota[] rank = intercala(notas , 0 , 4 , notas.length);
-        Nota[] texto = intercalaTexto(notasTexto , 0 , 4 ,notasTexto.length );
+        // Nota[] rank = intercala(notas , 0 , 4 , notas.length);
+        // Nota[] texto = intercalaTexto(notasTexto , 0 , 4 ,notasTexto.length );
 
-        for (Nota nota: rank) {
-            System.out.println(nota.getAluno() + " " + nota.getValor());
+        ordena(notas , 0 , notas.length) ;
+        ordenaTexto(textos , 0 , textos.length) ;
+
+
+        System.out.println(" - ");
+
+        for (Nota texto: textos) {
+            System.out.println(texto.getAluno() + " " + texto.getValor());
         }
 
         System.out.println(" - ");
 
-        for (Nota nota: texto) {
+        for (Nota nota: notas) {
             System.out.println(nota.getAluno() + " " + nota.getValor());
         }
     }
+
+    private static void ordena(Nota[] notas , int inicial , int termino) {
+        int quatidade = termino - inicial;
+        if(quatidade > 1){
+            int meio = ( inicial + termino )/2;
+            ordena(notas , inicial , meio);
+            ordena(notas , meio , termino);
+            intercala(notas , inicial , meio , termino);
+        }
+    }
+
+    private static void ordenaTexto(Nota[] textos , int inicial , int termino) {
+        int quatidade = termino - inicial;
+        if(quatidade > 1){
+            int meio = ( inicial + termino )/2;
+            ordenaTexto(textos , inicial , meio);
+            ordenaTexto(textos , meio , termino);
+            intercalaTexto(textos , inicial , meio , termino);
+        }
+    }
+
 
     private static Nota[] intercala(Nota[] notas , int inicial , int miolo , int termino ) {
         Nota[] resultado = new Nota[termino - inicial];
