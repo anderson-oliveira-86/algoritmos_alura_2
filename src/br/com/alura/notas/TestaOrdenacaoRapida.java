@@ -16,11 +16,33 @@ public class TestaOrdenacaoRapida {
         };
 
         ordenar(notas , 0 , notas.length );
+        int encontrei = busca(notas , 0 , notas.length , 9.3);
+
+        if(encontrei >= 0){
+            System.out.println("Encontrei a nota em " + encontrei);
+        }else{
+            System.out.println("Não encontrei");
+        }
 
         for (int atual = 0; atual < notas.length; atual++) {
             Nota nota = notas[atual];
             System.out.println(nota.getAluno() + " " + nota.getValor());
         }
+    }
+
+    private static int busca(Nota[] notas, int de, int ate, double buscando) {
+        int meio = (de + ate)/2;
+        Nota nota = notas[meio];
+
+        if(buscando == nota.getValor()){
+            return meio;
+        }
+        if(buscando < nota.getValor()){
+            return busca(notas , de , meio - 1 , buscando);
+        }
+            return busca(notas , meio + 1 , ate , buscando);
+
+
     }
 
     private static void ordenar(Nota[] notas, int de, int ate) {
